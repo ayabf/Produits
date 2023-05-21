@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="template">
+<head>
+  <meta charset="utf-8">
+  <title>Connexion</title>
+  <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/4.3.1/css/bootstrap.min.css}" />
+  <link rel="stylesheet" type="text/css" th:href="@{/css/custom.css}" />
+</head>
+<body>
+<div layout:fragment="Mycontent">
+  <div class="container mt-5">
+    <div class="col-md-6 offset-md-3">
+      <div class="card">
+        <div class="card-header">Connexion</div>
+        <div class="card-body">
+          <form method="post" th:action="@{login}">
+            <div class="form-group">
+              <label class="control-label">Utilisateur :</label>
+              <input type="text" name="username">
+            </div>
+            <div class="form-group">
+              <label class="control-label">Mot de passe :</label>
+              <input type="password" name="password">
+            </div>
+            <button class="btn btn-primary" type="submit">Se connecter</button>
+          </form>
+          <form th:action="@{/signup}" method="get">
+            <button type="submit" class="btn btn-primary">Ajouter un Compte</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</body>
+</html>

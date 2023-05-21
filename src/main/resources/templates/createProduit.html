@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="template">
+
+<link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/4.3.1/css/bootstrap.min.css}" />
+
+<head>
+    <meta charset="utf-8">
+    <title>Créer/Modifier produit</title>
+</head>
+
+<body>
+<div th:insert="template.html"></div>
+
+<div layout:fragment="navbar">
+    <div class="container">
+        <div class="card-body">
+            <form th:action="@{/saveProduit}" th:object="${produit}" method="get">
+                <input type="hidden" th:field="*{idProduit}" />
+
+                <div class="form-group">
+                    <label class="control-label">Nom produit :</label>
+                    <input type="text" class="form-control" name="nomProduit" th:field="*{nomProduit}"th:value="${produit.nomProduit}"/>
+                    <span th:errors=${produit.nomProduit} class="text-danger"> </span>
+
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label">Prix produit :</label>
+                    <input type="text" class="form-control" name="prixProduit"  th:field="*{prixProduit}" th:value="${produit.prixProduit}"/>
+                    <span th:errors=${produit.prixProduit} class="text-danger"> </span>
+
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label">Date création :</label>
+                    <input type="date" name="dateCreation" class="form-control" th:field="*{dateCreation}" th:value="${produit.dateCreation}"/>
+                    <span th:errors=${produit.dateCreation} class="text-danger"> </span>
+                   <div class="form-group">
+                        <select name="categorie.idCat" class="form-select form-select-lg">
+                            <option value="">-- Sélectionner une catégorie --</option>
+                            <option th:each="category : ${categories}"
+                                    th:value="${category.idCat}"
+                                    th:text="${category.nomCat}"
+                                    th:selected="${produit.categorie != null and category.idCat == produit.categorie.idCat}">
+
+                            </option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-primary" th:text="${produit.idProduit == null ? 'Ajouter' : 'Modifier'}">Ajouter/Modifier</button>
+                </div>
+            </form>
+        </div>
+
+        <div th:if="${msg}">
+            <p th:text="'Message: '+${msg}" />
+        </div>
+
+        <br />
+        <br />
+        <a href="ListeProduits">Liste produits</a>
+    </div>
+</div>
+</body>
+
+</html>
